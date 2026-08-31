@@ -21,23 +21,39 @@ export const calculator = {
   },
 };
 
+// caesarCipher.js
+
+function shiftChar(char, key) {
+  const code = char.charCodeAt(0);
+
+  if (isUpperCase(code)) {
+    return String.fromCharCode(wrap(code, 65, key));
+  }
+
+  if (isLowerCase(code)) {
+    return String.fromCharCode(wrap(code, 97, key));
+  }
+
+  return char; // non-alphabetical, leave as-is
+}
+
+function isUpperCase(code) {
+  return code >= 65 && code <= 90;
+}
+
+function isLowerCase(code) {
+  return code >= 97 && code <= 122;
+}
+
+function wrap(code, base, key) {
+  return ((((code - base + key) % 26) + 26) % 26) + base;
+}
+
 function caesarCipher(str, key) {
   return str
     .split("")
-    .map((char) => {
-      const code = char.charCodeAt(0);
-
-      if (code >= 65 && code <= 90) {
-        return String.fromCharCode(((((code - 65 + key) % 26) + 26) % 26) + 65);
-      }
-
-      if (code >= 97 && code <= 122) {
-        return String.fromCharCode(((((code - 97 + key) % 26) + 26) % 26) + 97);
-      }
-
-      return char;
-    })
+    .map((char) => shiftChar(char, key))
     .join("");
 }
 
-console.log(caesarCipher("xyz", 3));
+module.exports = caesarCipher;
