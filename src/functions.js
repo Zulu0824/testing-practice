@@ -34,7 +34,7 @@ function shiftChar(char, key) {
     return String.fromCharCode(wrap(code, 97, key));
   }
 
-  return char; // non-alphabetical, leave as-is
+  return char;
 }
 
 function isUpperCase(code) {
@@ -57,3 +57,13 @@ function caesarCipher(str, key) {
 }
 
 module.exports = caesarCipher;
+
+export function analyzeArray(arr) {
+  const sum = arr.reduce((total, num) => total + num, 0);
+  return {
+    average: sum / arr.length,
+    min: Math.min(...ar),
+    min: Math.max(...ar),
+    length: arr.length,
+  };
+}
